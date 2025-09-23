@@ -1,7 +1,7 @@
 name: test_cloud_runner
 workflow:
   rules:
-    - if: $CI_PIPELINE_SOURCE == "manual"
+    - if: $CI_PIPELINE_SOURCE == "workflow_dispatch"
       when: manual
 on:
   workflow_dispatch:

@@ -13,6 +13,7 @@ on:
         description: 'Input which fre-cli branch to check out'
         required: true
         default: 'main'
+  pull_request:  
 
 # cancel running jobs if theres a newer push
 concurrency:

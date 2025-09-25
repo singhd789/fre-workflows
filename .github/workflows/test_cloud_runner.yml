@@ -38,15 +38,16 @@ jobs:
           cwd=$(pwd)
           runner_path=$(echo $cwd | cut -d/ -f3)
           wrunner=${runner_path: -1}
-          echo $wrunner
-          #mkdir -p /contrib/container-test/ppp-setup
-          exit 1
+          #echo $wrunner
+          mkdir -p /contrib/container-test/ppp-setup_$wrunner
       - name: Run ppp-container
         run: |
           # Print pwd then run script
           echo "Currently in:"
           cwd=$(pwd)
           echo $cwd
+          echo $wrunner
+          exit 1
           gridspec_file=c96_OM4_025_grid_No_mg_drag_v20160808.tar
           bind_paths="--bind /contrib/container-test/ppp-setup/:/mnt:rw
                       --bind /contrib/container-test/history:/mnt/history:ro

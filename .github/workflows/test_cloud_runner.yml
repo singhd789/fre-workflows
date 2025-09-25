@@ -32,25 +32,19 @@ jobs:
           ref: ${{ github.event.inputs.fre-cli-branch }}
           path: './fre-cli'
           submodules: true
-      - name: check output dir
-        id: set_path
-        run: |
-          cwd=$(pwd)
-          runner_path=$(echo $cwd | cut -d/ -f3)
-          wrunner=${runner_path: -1}
-          #echo $wrunner
-          mkdir -p /contrib/container-test/ppp-setup_$wrunner
       - name: Run ppp-container
         run: |
           # Print pwd then run script
           echo "Currently in:"
           cwd=$(pwd)
           echo $cwd
-          echo $wrunner
-          echo "did it work?"
+          runner_path=$(echo $cwd | cut -d/ -f3)
+          wrunner=${runner_path: -1}
+          output_dir=/contrib/container-test/ppp-setup-$wrunner
+          mkdir -p $output_dir
           exit 0
           gridspec_file=c96_OM4_025_grid_No_mg_drag_v20160808.tar
-          bind_paths="--bind /contrib/container-test/ppp-setup/:/mnt:rw
+          bind_paths="--bind /:/mnt:rw
                       --bind /contrib/container-test/history:/mnt/history:ro
                       --bind /contrib/container-test/grid_spec/${gridspec_file}:/mnt/${gridspec_file}:ro
                       --bind /contrib/container-test"

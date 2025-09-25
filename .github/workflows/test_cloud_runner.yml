@@ -37,7 +37,7 @@ jobs:
         run: |
           cwd=$(pwd)
           runner_path=$(echo $cwd | cut -d/ -f3)
-          wrunner=${runner_path -1}
+          wrunner=${runner_path: -1}
           echo $wrunner
           #mkdir -p /contrib/container-test/ppp-setup
           exit 1

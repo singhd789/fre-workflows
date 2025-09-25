@@ -37,20 +37,10 @@ jobs:
         run: |
           cwd=$(pwd)
           runner_path=$(echo $cwd | cut -d/ -f3)
-          echo $runner_path
+          wrunner=${runner_path -1}
+          echo $wrunner
+          #mkdir -p /contrib/container-test/ppp-setup
           exit 1
-#          echo "did it do stuff?"
-#          echo "current dir"
-#          pwd
-#          echo "contents of current fre-wf dir"
-#          ls
-#          echo "go into fre-cli" 
-#          cd fre-cli
-#          echo "contents of fre-cli"
-#          ls
-#          ls fre/mkmf
-#          git branch
-#          exit 1
       - name: Run ppp-container
         run: |
           # Print pwd then run script

@@ -35,8 +35,8 @@ jobs:
       - name: check output dir
         id: set_path
         run: |
-          echo "$github.run_id"
-          echo "$runner.name"
+          cwd=$(echo $pwd)
+          runner_path=$(echo $cwd | cut -d/ -f3)
           exit 1
 #          echo "did it do stuff?"
 #          echo "current dir"

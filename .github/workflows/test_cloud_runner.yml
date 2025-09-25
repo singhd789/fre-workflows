@@ -35,8 +35,8 @@ jobs:
       - name: check output dir
         id: set_path
         run: |
-          path=$(pwd)
-          runner_path=$(echo $p | cut -d/ -f3)
+          cwd=$(pwd)
+          runner_path=$(echo $cwd | cut -d/ -f3)
           echo $runner_path
           exit 1
 #          echo "did it do stuff?"

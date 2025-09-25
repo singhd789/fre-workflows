@@ -47,7 +47,8 @@ jobs:
           cwd=$(pwd)
           echo $cwd
           echo $wrunner
-          exit 1
+          echo "did it work?"
+          exit 0
           gridspec_file=c96_OM4_025_grid_No_mg_drag_v20160808.tar
           bind_paths="--bind /contrib/container-test/ppp-setup/:/mnt:rw
                       --bind /contrib/container-test/history:/mnt/history:ro

@@ -2,6 +2,11 @@ name: test_cloud_runner
 on:
   workflow_dispatch:
     inputs:
+      fre-workflows-repo:
+        description: "Input the owner/repo (this can include forks - example: singhd789/fre-workflows)"
+        required: true
+        type: string
+        default: 'NOAA-GFDL/fre-workflows'
       fre-cli-repo:
         description: 'NOAA-GFDL/fre-cli repo'
         required: true
@@ -23,8 +28,10 @@ jobs:
   test-cloud:
     runs-on: self-hosted
     steps:
-      - name: Checkout current repository
+      - name: Checkout fre-workflows repository
         uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.inputs.fre-workflows-repo }}
       - name: Test workflow_dispatch
         uses: actions/checkout@v4
         with:

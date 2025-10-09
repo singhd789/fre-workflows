@@ -3,10 +3,14 @@ on:
   workflow_dispatch:
     inputs:
       fre-workflows-repo:
-        description: "Input the owner/repo (this can include forks - example: singhd789/fre-workflows)"
-        required: true
+        description: "Input the owner/repo of the fre-workflows FORK (example: singhd789/fre-workflows). Leave empty if not using a fork."
+        required: false
         type: string
         default: 'NOAA-GFDL/fre-workflows'
+      fre-workflows-branch:
+        description: 'Input which fre-workflows branch on fork to check out'
+        required: true
+        default: 'main'
       fre-cli-repo:
         description: 'NOAA-GFDL/fre-cli repo'
         required: true
@@ -28,11 +32,16 @@ jobs:
   test-cloud:
     runs-on: self-hosted
     steps:
-      - name: Checkout fre-workflows repository
+      - name: Checkout fre-workflows fork if specified
+        if: ${{ github.event.inputs.fre-workflows-repo != ''}}
         uses: actions/checkout@v4
         with:
           repository: ${{ github.event.inputs.fre-workflows-repo }}
-      - name: Test workflow_dispatch
+          ref: ${{ github.event.inputs.fre-cli-branch }}
+      - name: Checkout fre-workflows repository if no fork specified
+        if: ${{ github.event.inputs.fre-workflows-repo == ''}}
+        uses: actions/checkout@v4
+      - name: Check out fre-cli branch
         uses: actions/checkout@v4
         with:
           repository: ${{ github.event.inputs.fre-cli-repo }}

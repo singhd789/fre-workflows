@@ -46,6 +46,15 @@ jobs:
           ref: ${{ github.event.inputs.fre-cli-branch }}
           path: './fre-cli'
           submodules: true
+      - name: TEST REPOS
+        run: |
+          echo "Currently in:"
+          cwd=$(pwd)
+          echo $cwd
+          echo "git remote time"
+          grt=$(git remote -v)
+          echo $grt
+          exit 1
       - name: Run ppp-container
         run: |
           # Print pwd then run script

@@ -2,6 +2,14 @@ name: test_cloud_runner
 on:
   workflow_dispatch:
     inputs:
+      fre-workflows-repo:
+        description: "If using fork: input FORK NAME (example: singhd789/fre-workflows). Leave empty if not using a fork."
+        required: false
+        type: string
+      fre-workflows-branch:
+        description: 'If on fork: BRANCH ON FORK'
+        required: false
+        type: string
       fre-cli-repo:
         description: 'NOAA-GFDL/fre-cli repo'
         required: true
@@ -13,7 +21,8 @@ on:
         description: 'Input which fre-cli branch to check out'
         required: true
         default: 'main'
-        
+        type: string
+
 # cancel running jobs if theres a newer push
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -23,15 +32,34 @@ jobs:
   test-cloud:
     runs-on: self-hosted
     steps:
-      - name: Checkout current repository
+      - name: Checkout fre-workflows fork if specified
+        if: ${{ github.event.inputs.fre-workflows-repo != ''}}
         uses: actions/checkout@v4
-      - name: Test workflow_dispatch
+        with:
+          repository: ${{ github.event.inputs.fre-workflows-repo }}
+          ref: ${{ github.event.inputs.fre-workflows-branch }}
+      - name: Checkout fre-workflows repository if no fork specified
+        if: ${{ github.event.inputs.fre-workflows-repo == ''}}
+        uses: actions/checkout@v4
+      - name: Check out fre-cli branch
         uses: actions/checkout@v4
         with:
           repository: ${{ github.event.inputs.fre-cli-repo }}
           ref: ${{ github.event.inputs.fre-cli-branch }}
           path: './fre-cli'
           submodules: true
+      - name: TEST REPOS
+        run: |
+          echo "Currently in:"
+          pwd
+          
+          echo "git remote time"
+          git remote -v
+          
+          echo "check branch"
+          git branch
+          
+          exit 1
       - name: Run ppp-container
         run: |
           # Print pwd then run script

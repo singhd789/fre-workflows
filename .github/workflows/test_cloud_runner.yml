@@ -9,7 +9,6 @@ on:
       fre-workflows-branch:
         description: 'If on fork: input which fre-workflows branch on fork to check out'
         required: false
-        default: 'main'
       fre-cli-repo:
         description: 'NOAA-GFDL/fre-cli repo'
         required: true

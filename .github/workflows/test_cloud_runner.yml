@@ -3,11 +3,11 @@ on:
   workflow_dispatch:
     inputs:
       fre-workflows-repo:
-        description: "If using fork: input the owner/repo of the fre-workflows FORK (example: singhd789/fre-workflows). Leave empty if not using a fork."
+        description: "If using fork: input FORK NAME (example: singhd789/fre-workflows). Leave empty if not using a fork."
         required: false
         type: string
       fre-workflows-branch:
-        description: 'If on fork: input which fre-workflows branch on fork to check out'
+        description: 'If on fork: BRANCH ON FORK'
         required: false
       fre-cli-repo:
         description: 'NOAA-GFDL/fre-cli repo'
@@ -49,14 +49,14 @@ jobs:
       - name: TEST REPOS
         run: |
           echo "Currently in:"
-          cwd=$(pwd)
-          echo $cwd
+          pwd
+          
           echo "git remote time"
-          grt=$(git remote -v)
-          echo $grt
+          git remote -v
+          
           echo "check branch"
-          gb=$(git branch)
-          echo $gb
+          git branch
+          
           exit 1
       - name: Run ppp-container
         run: |

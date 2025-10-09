@@ -55,7 +55,8 @@ jobs:
           grt=$(git remote -v)
           echo $grt
           echo "check branch"
-          echo $(git branch)
+          gb=$(git branch)
+          echo $gb
           exit 1
       - name: Run ppp-container
         run: |

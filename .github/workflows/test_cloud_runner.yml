@@ -58,8 +58,7 @@ jobs:
           
           echo "check branch"
           git branch
-          
-          exit 1
+        
       - name: Run ppp-container
         run: |
           # Print pwd then run script

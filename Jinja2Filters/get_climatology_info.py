@@ -130,7 +130,7 @@ class Climatology(object):
             input_interval = P{self.pp_chunk.years}Y
             grid = {self.grid}
             frequency = {self.frequency}
-            outputDir = $CYLC_WORKFLOW_SHARE_DIR/shards/av/$grid
+            outputDir = $CYLC_WORKFLOW_SHARE_DIR/shards/av/{self.grid}
         """
 
         offset = duration_parser.parse(f"P{self.interval_years}Y") - one_year

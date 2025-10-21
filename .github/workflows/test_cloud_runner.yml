@@ -57,11 +57,14 @@ jobs:
           echo "Currently in:"
           pwd
           
-          echo "git remote time"
+          echo "git remote and git branch time for fre-workflows"
           git remote -v
-          
-          echo "check branch"
           git branch
+
+          echo "go into fre-cli and check branch"
+          cd fre-cli
+          git branch
+          cd ..
         
       - name: Run ppp-container
         run: |

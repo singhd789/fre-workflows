@@ -142,6 +142,7 @@ class Climatology(object):
             components = {self.component}
             currentChunk = P{self.interval_years}Y
             end = $(cylc cycle-point --print-year --offset={offset})
+            begin = $(cylc cycle-point)
         """
 
         definitions += f"""

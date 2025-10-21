@@ -24,10 +24,11 @@ conda activate /app/cylc-flow-tools
 
 # update fre-cli env with specific branch development
 cd fre-cli
-git checkout add-climo-wrapper
+pwd 
 pip install .
 export PATH=/mnt/.local/bin:$PATH
 cd -
+fre app --help
 
 get_user_input () {
     # User input

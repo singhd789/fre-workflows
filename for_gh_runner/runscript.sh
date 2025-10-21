@@ -33,16 +33,19 @@ fre app --help
 get_user_input () {
     # User input
     echo Please Enter Experiment Name:
+    echo "Exp. name: test_pp"
+    
     echo Please Enter Platform:
 #    read -r plat
-    echo "Platform: gfdl.ncrc5-intel22-classic"
+    echo "Platform: ptest"
 
     echo Please Enter Target:
 #    read -r targ
-    echo "Target: debug"
+    echo "Target: ttest"
 
     echo Please Enter Path to model yaml file:
 #    read -r yamlfile
+    echo "Model yaml: ./for_gh_runner/yaml_workflow/model.yaml"
 
     expname="test_pp"
     plat="ptest"
@@ -95,15 +98,6 @@ fre_pp_steps () {
 
     #Not sure if needed because if no global.cylc found, cylc uses default, which utilizes background jobs anyway ...
     #export CYLC_CONF_PATH=/mnt/cylc-src/${name}/generic-global-config/
-
-    cd fre-cli
-    git branch
-    git status
-    pip install .
-    export PATH=/mnt/.local/bin:$PATH
-    cd -
-    which fre
-    fre app --help
     
     ## Configure the rose-suite and rose-app files for the workflow
     echo -e "\nRunning fre pp configure-yaml to configure the rose-suite and rose-app files ..."
@@ -111,14 +105,13 @@ fre_pp_steps () {
     check_exit_status "CONFIGURE-YAML"
 
     # Install
-    echo -e "\nRunning fre pp install to instal the workflow in ${HOME}/cylc-run/${name} ... "
+    echo -e "\nRunning fre pp install to install the workflow in ${HOME}/cylc-run/${name} ... "
     fre -v pp install -e ${expname} -p ${plat} -t ${targ}
     check_exit_status "INSTALL"
 
     ## Validate
     echo -e "\nRunning cylc validate ... "
     pwd
-    ls
     cylc validate $name
     check_exit_status "VALIDATE"
 

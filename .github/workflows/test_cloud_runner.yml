@@ -27,10 +27,10 @@ on:
     branches:
       - main  # triggers pipeline on push to main
 
-# cancel running jobs if theres a newer push
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+## cancel running jobs if theres a newer push
+#concurrency:
+#  group: ${{ github.workflow }}-${{ github.ref }}
+#  cancel-in-progress: true
 
 jobs:
   test-cloud:
@@ -69,6 +69,11 @@ jobs:
           echo "Currently in:"
           cwd=$(pwd)
           echo $cwd
+          runner_path=$(echo $cwd | cut -d/ -f3)
+          wrunner=${runner_path: -1}
+          output_dir=/contrib/container-test/ppp-setup-$wrunner
+          mkdir -p $output_dir
+
           gridspec_file=c96_OM4_025_grid_No_mg_drag_v20160808.tar
           bind_paths="--bind /contrib/container-test/ppp-setup/:/mnt:rw
                       --bind /contrib2/c96L65/history:/mnt/history:ro

@@ -1,5 +1,5 @@
 """
-Return a space-separate string of components to be post-processed.
+Return a space separated string of components to be post-processed.
 """
 import logging
 import yaml
@@ -12,8 +12,10 @@ def get_components(yamlfile):
     """
     Retrieve active pp components from the yaml
 
-    Arguments:
-        yamlfile (str): Filepath to the yaml
+    :param yamlfile: Filepath to the yaml
+    :type yamlfile: str
+    :return: Space separated string of components to be post-processed
+    :rtype: str
     """
     fre_logger.debug("Yaml file: %s", yamlfile)
 

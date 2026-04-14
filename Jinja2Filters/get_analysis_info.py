@@ -32,7 +32,7 @@ class AnalysisScript:
             yaml: Resolved postprocessing yaml
         """
         self.name = name
-        logger.debug(f"{name}: initializing AnalysisScript instance")
+        logger.debug("%s: initializing AnalysisScript instance", name)
 
         # Skip if configuration wants to skip it
         self.switch = config["workflow"]["analysis_on"]
@@ -107,7 +107,7 @@ class AnalysisScript:
             time_parser.parse(two)
         ]
 
-        logger.debug(f"{name}: initialized instance")
+        logger.debug("%s: initialized instance", name)
 
     def graph(self, analysis_only):
         """Generate the cylc task graph string for the analysis script.
@@ -123,9 +123,9 @@ class AnalysisScript:
 
         graph = ""
 
-        logger.debug(f"script type = {self.script_type}")
-        logger.debug(f"chunk size = {self.chunk}")
-        logger.debug(f"analysis date range = {self.date_range}")
+        logger.debug("script type = $s", self.script_type)
+        logger.debug("chunk size = %s", self.chunk)
+        logger.debug("analysis date range = %s", self.date_range)
 
         date0, date1 = self.date_range
 
@@ -318,7 +318,7 @@ fre analysis install \
             # corresponding to the interval (chunk), e.g. ANALYSIS-P1Y.
             # Then, the analysis script will inherit from that family, to enable
             # both the task triggering and the yr1 and datachunk template vars.
-            logger.debug(f"{self.name}: Will run every chunk {self.chunk}")
+            logger.debug("%s: Will run every chunk {self.chunk}", self.name)
             if self.is_legacy:
                 definitions += legacy_analysis_str
             else:
@@ -365,7 +365,7 @@ fre analysis install \
             if not self.is_legacy:
                 definitions += install_str
 
-            logger.debug(f"{self.name}: Finished determining scripting")
+            logger.debug("%s: Finished determining scripting", self.name)
             return definitions
 
         if self.script_type == "cumulative":
@@ -373,7 +373,7 @@ fre analysis install \
             # To make the task run, we will create a task family for
             # each chunk/interval, starting from the beginning of pp data
             # then we create an analysis script task for each of these task families.
-            logger.debug(f"{self.name}: Will run each chunk {self.chunk} from beginning {self.experiment_date_range[0]}")
+            logger.debug("%s: Will run each chunk %s from beginning %s", self.name, self.chunk, self.experiment_date_range[0])
             date = self.experiment_date_range[0]
             while date <= self.experiment_date_range[1]:
                 date_str = f"{date.year:04}"
@@ -518,7 +518,7 @@ def task_generator(yaml_, experiment_components, experiment_start, experiment_st
         script_info = AnalysisScript(script_name, script_params, experiment_components,
                                      experiment_start, experiment_stop, pp_chunks, yaml_)
         if script_info.switch is False:
-            logger.debug(f"{script_name}: Skipping, switch set to off")
+            logger.debug("%s: Skipping, switch set to off", script_name)
             continue
         yield script_info
 

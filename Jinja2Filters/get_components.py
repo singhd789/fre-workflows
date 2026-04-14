@@ -1,3 +1,6 @@
+"""
+Return a space-separate string of components to be post-processed.
+"""
 import logging
 import yaml
 
@@ -12,7 +15,7 @@ def get_components(yamlfile):
     Arguments:
         yamlfile (str): Filepath to the yaml
     """
-    fre_logger.debug(f"Yaml file: {yamlfile}")
+    fre_logger.debug("Yaml file: %s", yamlfile)
 
     components = []
     with open(yamlfile) as file_:
@@ -22,13 +25,13 @@ def get_components(yamlfile):
             if "postprocess_on" in component:
                 if component['postprocess_on'] is True:
                     components.append(component["type"])
-                    #print(f'{component["type"]} set to true (added)')
+                    fre_logger.info("%s to be post-processed", component["type"])
                 else:
-                    print(f'{component["type"]} set to false (not added)')
+                    fre_logger.info("%s will NOT be post-processed", component["type"])
             else:
                 ##default is True if not set
                 components.append(component["type"])
-                #print(f'{component["type"]} not set (added)')
+                fre_logger.info("%s to be post-processed", component["type"])
 
     # we want to return a list, but some other scripts are expecting a space-separated string
     #return(components)

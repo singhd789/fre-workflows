@@ -512,12 +512,12 @@
                 exit 1
             fi
             if [[ -f {{ REFINED_HISTORY_DIR }}/$oname.nc.tar ]]; then
+                hsmget -v -t -a {{ REFINED_HISTORY_DIR }} -p {{ PTMP_DIR }}/{{ REFINED_HISTORY_DIR }} \
+                    -w $TMPDIR/modify_refineDiag $hsmdate/\*
                 echo "the contents of {{ PTMP_DIR }}/{{ REFINED_HISTORY_DIR }} is..."
                 ls {{ PTMP_DIR }}/{{ REFINED_HISTORY_DIR }}
                 echo "the contents of {{ PTMP_DIR }}/{{ REFINED_HISTORY_DIR }}/$oname.nc is..."
                 ls {{ PTMP_DIR }}/{{ REFINED_HISTORY_DIR }}/$oname.nc
-                hsmget -v -t -a {{ REFINED_HISTORY_DIR }} -p {{ PTMP_DIR }}/{{ REFINED_HISTORY_DIR }} \
-                    -w $TMPDIR/modify_refineDiag $hsmdate/\*
                 mv -f * $TMPDIR/modify_refineDiag
                 mv -f $TMPDIR/modify_refineDiag/* .
                 rm -rf $TMPDIR/modify_refineDiag

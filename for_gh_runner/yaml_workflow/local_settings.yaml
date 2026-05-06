@@ -4,7 +4,7 @@ directories:
 #
 # to have a faster turn-around (does not test archive data staging), use the below
   history_dir:         "/work/inl/test_cloud_runner_history_files"
-  refined_history_dir: "/work/d4s/fre-wf-local-testing/refined_history"
+  refined_history_dir: "/work/$USER/fre-wf-local-testing/refined_history"
   pp_dir:             !join [/work/$USER/test_cloud_runner_scratch_dir/, *FRE_STEM, /, pp]
 #  analysis_dir:       !join [/nbhome/$USER/, *FRE_STEM, /, *name]
   ptmp_dir:           "/xtmp/$USER/ptmp"

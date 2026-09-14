@@ -24,6 +24,9 @@ env_setup () {
     # update fre-cli env with specific branch development
     cd fre-cli
     pip install .
+    mamba install -p /app/cylc-flow-tools/env noaa-gfdl::hsm=1.4.0
+    mamba install -p /app/cylc-flow-tools/env noaa-gfdl::fre-nctools=2022.02.01
+
     export PATH=/mnt/.local/bin:$PATH
     cd -
 }

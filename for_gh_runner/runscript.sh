@@ -12,9 +12,8 @@ env_setup () {
 #    if [ -d "${HOME}/.conda/envs/cylc-flow-tools-dev" ]; then
 #        conda remove --prefix ${HOME}/.conda/envs/cylc-flow-tools-dev --all
 #    fi
-    conda create -n cylc-flow-tools-dev --clone /app/cylc-flow-tools/env
+    conda create --prefix /app/cylc-flow-tools-dev --clone /app/cylc-flow-tools
     conda activate cylc-flow-tools-dev
-    conda env list
 
     ## Since these packages are pp workflow specific, install them here to keep the fre-cli environment in the container non-GFDL specific and update fre-cli env with specific branch development
     cd fre-cli

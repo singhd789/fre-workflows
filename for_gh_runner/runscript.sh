@@ -18,9 +18,10 @@ env_setup () {
 #    conda activate /app/cylc-flow-tools-dev
 
     # Conda envs automatically mapped to ~/.conda/envs/
-    conda create --prefix ~/.conda/envs/cylc-flow-tools-dev --clone /app/cylc-flow-tools/env
-    conda init
+    conda create --prefix ~/.conda/envs/cylc-flow-tools-dev --clone /app/cylc-flow-tools/env --offline
+#    conda init
     conda activate cylc-flow-tools-dev
+    conda env list 
 
     ## Since these packages are pp workflow specific, install them here to keep the fre-cli environment in the container non-GFDL specific and update fre-cli env with specific branch development
     cd fre-cli

@@ -8,10 +8,10 @@
 ##    - checks for the status of the workflow (before installation step)
 
 env_setup () {
-    ## Clone environment in container
-    if [ -d "${HOME}/.conda/envs/cylc-flow-tools-dev" ]; then
-        conda remove --prefix ${HOME}/.conda/envs/cylc-flow-tools-dev --all
-    fi
+#    ## Clone environment in container
+#    if [ -d "${HOME}/.conda/envs/cylc-flow-tools-dev" ]; then
+#        conda remove --prefix ${HOME}/.conda/envs/cylc-flow-tools-dev --all
+#    fi
     conda create -n cylc-flow-tools-dev --clone /app/cylc-flow-tools/env
     conda activate cylc-flow-tools-dev
     conda env list

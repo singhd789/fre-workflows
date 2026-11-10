@@ -39,7 +39,7 @@ env_setup () {
         conda deactivate
         conda activate cylc-flow-tools-dev
         conda env list 
-
+    fi
     ## Since these packages are pp workflow specific, install them here to keep the fre-cli environment in the container non-GFDL specific and update fre-cli env with specific branch development
     cd fre-cli
     echo "RE-INSTALL FRE-CLI"

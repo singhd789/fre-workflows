@@ -36,14 +36,17 @@ env_setup () {
 
     ## Since these packages are pp workflow specific, install them here to keep the fre-cli environment in the container non-GFDL specific and update fre-cli env with specific branch development
     cd fre-cli
-    echo "PIP INSTALL"
+    echo "RE-INSTALL FRE-CLI"
     pip install .
-    echo "INSTALL HSM"
-    conda install -p ${HOME}/.conda/envs/cylc-flow-tools-dev noaa-gfdl::hsm=1.4.0
-#    conda install -p /app/cylc-flow-tools/env noaa-gfdl::hsm=1.4.0
     echo "INSTALL FRE-NCTOOLS"
     conda install -p ${HOME}/.conda/envs/cylc-flow-tools-dev noaa-gfdl::fre-nctools=2022.02.01
-#    conda install -p /app/cylc-flow-tools/env noaa-gfdl::fre-nctools=2022.02.01
+    echo "INSTALL HSM"
+    conda install -p ${HOME}/.conda/envs/cylc-flow-tools-dev noaa-gfdl::hsm=1.4.0
+
+
+    echo "VERSION CHECK:"
+    hsm --version
+    fre-nctools --version
 
     export PATH=/mnt/.local/bin:$PATH
     cd -
@@ -166,7 +169,7 @@ main () {
 
     env_setup
 
-    #Create directories needed for post-processing
+    # Create directories needed for post-processing
     create_dirs
 
     # Run the post-processing steps

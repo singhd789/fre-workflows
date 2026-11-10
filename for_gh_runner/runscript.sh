@@ -10,17 +10,26 @@
 env_setup () {
 #    ## Clone environment in container
     if [ -d "${HOME}/.conda/envs/cylc-flow-tools-dev" ]; then
-        #rm -rf ${HOME}/.conda/envs/cylc-flow-tools-dev
-        conda env remove -p "${HOME}/.conda/envs/cylc-flow-tools-dev" -y
+        rm -rf ${HOME}/.conda/envs/cylc-flow-tools-dev
+        #conda env remove -p "${HOME}/.conda/envs/cylc-flow-tools-dev" -y
     fi
-
-#    conda create --prefix /app/cylc-flow-tools-dev --clone /app/cylc-flow-tools/env
-#    conda init
-#    conda activate /app/cylc-flow-tools-dev
+###################################################
+######want to do some way to see wht version of hsm and fre-nctools are in cylc-flow-tools-dev env because cloning the environment to install packages into it is taking FOREVER
+    # if they match or whatever, use already created clone
+    # if not, re-clone and install
+#    if [ -d "${HOME}/.conda/envs/cylc-flow-tools-dev" ]; then
+#        if hsm version == 1.4.0 and fre-nctools version == 2022.02.01; then 
+#            echo "env exists girl"
+#        else
+#        conda env remove -p "${HOME}/.conda/envs/cylc-flow-tools-dev" -y
+#    fi 
+###################################################
+# also try mamba
+###################################################
 
     # Conda envs automatically mapped to ~/.conda/envs/
-    conda create --prefix ~/.conda/envs/cylc-flow-tools-dev --clone /app/cylc-flow-tools/env --offline
-#    conda init
+    conda create --prefix ${HOME}/.conda/envs/cylc-flow-tools-dev --clone /app/cylc-flow-tools/env --offline
+    #conda init
     conda activate cylc-flow-tools-dev
     conda env list 
 
@@ -29,9 +38,11 @@ env_setup () {
     echo "PIP INSTALL"
     pip install .
     echo "INSTALL HSM"
-    conda install -p /app/cylc-flow-tools/env noaa-gfdl::hsm=1.4.0
+    conda install -p ${HOME}/.conda/envs/cylc-flow-tools-dev noaa-gfdl::hsm=1.4.0
+#    conda install -p /app/cylc-flow-tools/env noaa-gfdl::hsm=1.4.0
     echo "INSTALL FRE-NCTOOLS"
-    conda install -p /app/cylc-flow-tools/env noaa-gfdl::fre-nctools=2022.02.01
+    conda install -p ${HOME}/.conda/envs/cylc-flow-tools-dev noaa-gfdl::fre-nctools=2022.02.01
+#    conda install -p /app/cylc-flow-tools/env noaa-gfdl::fre-nctools=2022.02.01
 
     export PATH=/mnt/.local/bin:$PATH
     cd -

@@ -29,7 +29,8 @@ env_setup () {
 
     # Conda envs automatically mapped to ~/.conda/envs/
     conda create --prefix ${HOME}/.conda/envs/cylc-flow-tools-dev --clone /app/cylc-flow-tools/env --offline
-    #conda init
+    source /app/miniforge/etc/profile.d/conda.sh
+    conda deactivate
     conda activate cylc-flow-tools-dev
     conda env list 
 

@@ -26,13 +26,19 @@ env_setup () {
 ###################################################
 # also try mamba
 ###################################################
-
-    # Conda envs automatically mapped to ~/.conda/envs/
-    conda create --prefix ${HOME}/.conda/envs/cylc-flow-tools-dev --clone /app/cylc-flow-tools/env --offline
-    source /app/miniforge/etc/profile.d/conda.sh
-    conda deactivate
-    conda activate cylc-flow-tools-dev
-    conda env list 
+    if [ -d "${HOME}/.conda/envs/cylc-flow-tools-dev" ]; then
+        source /app/miniforge/etc/profile.d/conda.sh
+        conda deactivate
+        conda activate cylc-flow-tools-dev
+        conda remove hsm
+        conda remove fre-nctools 
+    else
+        # Conda envs automatically mapped to ~/.conda/envs/
+        conda create --prefix ${HOME}/.conda/envs/cylc-flow-tools-dev --clone /app/cylc-flow-tools/env --offline
+        source /app/miniforge/etc/profile.d/conda.sh
+        conda deactivate
+        conda activate cylc-flow-tools-dev
+        conda env list 
 
     ## Since these packages are pp workflow specific, install them here to keep the fre-cli environment in the container non-GFDL specific and update fre-cli env with specific branch development
     cd fre-cli
@@ -45,8 +51,9 @@ env_setup () {
 
 
     echo "VERSION CHECK:"
-    hsm --version
-    fre-nctools --version
+    conda list | grep "fre-cli"
+    conda list | grep "hsm"
+    conda list | grep "fre-nctools"
 
     export PATH=/mnt/.local/bin:$PATH
     cd -

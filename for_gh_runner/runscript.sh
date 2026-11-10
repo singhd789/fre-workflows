@@ -9,10 +9,10 @@
 
 env_setup () {
 #    ## Clone environment in container
-    if [ -d "${HOME}/.conda/envs/cylc-flow-tools-dev" ]; then
-        rm -rf ${HOME}/.conda/envs/cylc-flow-tools-dev
-        #conda env remove -p "${HOME}/.conda/envs/cylc-flow-tools-dev" -y
-    fi
+#    if [ -d "${HOME}/.conda/envs/cylc-flow-tools-dev" ]; then
+#        rm -rf ${HOME}/.conda/envs/cylc-flow-tools-dev
+#        #conda env remove -p "${HOME}/.conda/envs/cylc-flow-tools-dev" -y
+#    fi
 ###################################################
 ######want to do some way to see wht version of hsm and fre-nctools are in cylc-flow-tools-dev env because cloning the environment to install packages into it is taking FOREVER
     # if they match or whatever, use already created clone
